@@ -1,0 +1,28 @@
+version: '3.4'
+
+#services:
+#  subscriptionmanagementapi:
+    
+#    build:
+#      context: .
+#      dockerfile: SubscriptionManagementApi/Dockerfile
+
+services:
+  subscriptionmanagementapi:
+    image: ${DOCKER_REGISTRY-}subscriptionmanagementapi
+    build:
+      context: .
+      dockerfile: SubscriptionManagementApi/Dockerfile
+    ports: 
+      - "5000:5000"
+      - "5001:5001"
+
+  postgres-db:
+    image: "postgres"
+    container_name: "postgres-db"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=P@ssw0rd
+      - POSTGRES_DB=Subscription_Management
+    ports:
+      - 5432:5432
